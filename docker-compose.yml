@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+
+  unit:
+    image: jportasa/centos5-go:1.0
+    volumes:
+      - ./src/app:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "go test"
