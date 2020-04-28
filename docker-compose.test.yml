@@ -7,4 +7,4 @@ services:
     volumes:
       - ./src/app:/usr/src/app
     working_dir: /usr/src/app
-    command: bash -c "go test"
+    command: bash -c "go test -v"
