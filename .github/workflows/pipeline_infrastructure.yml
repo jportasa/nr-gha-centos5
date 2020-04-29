@@ -69,8 +69,9 @@ jobs:
           REPO_YUM_UPDATE_METADATA_PATH: 'infrastructure_agent/linux/yum/el/8/x86_64'
           IAM_ROLE: 'none'
         run: |
-
-          docker-compose --file docker-compose-repo-yum-updater.yml up
+          echo "HOla"
+          echo $AWS_REGION
+          #docker-compose --file docker-compose-repo-yum-updater.yml up
 
       - name: Check running containers
         run: docker ps -a
