@@ -67,6 +67,7 @@ jobs:
           S3_BUCKET: 'nr-test'
           MOUNT_POINT: "/mnt/"
           REPO_YUM_UPDATE_METADATA_PATH: 'infrastructure_agent/linux/yum/el/8/x86_64'
+          IAM_ROLE: 'none'
         run: |
 
           docker-compose --file docker-compose-repo-yum-updater.yml up
