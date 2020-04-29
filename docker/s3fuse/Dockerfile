@@ -3,6 +3,9 @@ MAINTAINER Xueshan Feng <xueshan.feng@gmail.com>
 
 ENV VERSION 1.83
 
+ENV IAM_ROLE=none
+ENV MOUNT_POINT=/mnt/repo
+
 RUN apt-get update -qq
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
  automake \

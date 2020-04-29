@@ -64,7 +64,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
           S3_BUCKET: nr-test
-          MOUNT_POINT: /mnt/
+          MOUNT_POINT: "/mnt/"
           REPO_YUM_UPDATE_METADATA_PATH: infrastructure_agent/linux/yum/el/8/x86_64
         run: |
           echo $AWSACCESSKEYID
