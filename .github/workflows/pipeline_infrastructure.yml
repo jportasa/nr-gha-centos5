@@ -40,5 +40,13 @@ jobs:
         run: |
           docker-compose --file  docker-compose-test-windows.yml run unit
 
+  test-go-windows:
+    runs-on: ubuntu-latest
 
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run Go tests in Windows
+        run: |
+          docker-compose --file  docker-compose-test-windows.yml run unit
 

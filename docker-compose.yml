@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  s3fs:
+    image: xueshanf/s3fs:latest
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    devices:
+      - /dev/fuse
+    volumes:
+      - s3data:/mnt
+    command: /usr/bin/s3fs -f -o allow_other -o use_cache=/tmp nr-test /mnt/
+
+  consumer:
+    image: alpine
+    command: sleep 100000
+    volumes:
+      - s3data:/mnt
+    depends_on:
+      - s3fs
+
+volumes:
+  s3data:
+
+
+#---------
+#version: '3'
+#services:
+#  s3vol:
+#    image: elementar/s3-volume
+#    command: /data s3://nr-test
+#    volumes:
+#      - s3data:/data
+#
+##  linux:
+##    image: tbutzer/bash-tester
+##    command: sleep 100000
+##    volumes:
+##      - s3data:/var/test
+#
+#volumes:
+#  s3data:
+#    driver: local
