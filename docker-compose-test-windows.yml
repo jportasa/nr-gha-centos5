@@ -3,7 +3,7 @@ version: '3'
 services:
 
   unit:
-    image: jportasa/windowsnanoserver-go:1.10.1
+    image: jportasa/windowsnanoserver-go:1.1
     volumes:
       - ./src/app:c:/gopath
     command: "go test -v"
