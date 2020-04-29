@@ -28,7 +28,6 @@ jobs:
 
       - name: Run Go tests in Centos 5
         run: |
-          docker-compose --file docker-compose-test-centos5.yml build
           docker-compose --file docker-compose-test-centos5.yml run unit
 
   test-go-windows:
@@ -37,9 +36,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run Go tests in Centos 5
+      - name: Run Go tests in Windows
         run: |
-          docker-compose --file docker-compose-test-windows.yml build
           docker-compose --file  docker-compose-test-windows.yml run unit
 
 
