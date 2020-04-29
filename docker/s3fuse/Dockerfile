@@ -3,7 +3,7 @@ FROM alpine:3.5
 
 # the following ENV need to be present
 ENV IAM_ROLE=none
-ENV MOUNT_POINT=/var/s3
+ENV MOUNT_POINT=/mnt/repo
 VOLUME /var/s3
 
 ARG S3FS_VERSION=v1.80
