@@ -58,17 +58,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: set environment variables
-        uses: allenevans/set-env@v1.0.0
-        with:
+      - name: Start s3fuse & repo-yum-updater
+
+        env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
-          S3_BUCKET: nr-test
+          AWS_REGION: 'us-east-1'
+          S3_BUCKET: 'nr-test'
           MOUNT_POINT: "/mnt/"
-          REPO_YUM_UPDATE_METADATA_PATH: infrastructure_agent/linux/yum/el/8/x86_64
-
-      - name: Start s3fuse & repo-yum-updater
+          REPO_YUM_UPDATE_METADATA_PATH: 'infrastructure_agent/linux/yum/el/8/x86_64'
         run: |
           docker-compose --file docker-compose-repo-yum-updater.yml up
 
