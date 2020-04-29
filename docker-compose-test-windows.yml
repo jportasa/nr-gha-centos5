@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+
+  unit:
+    image: jportasa/windowsnanoserver-go:1.10.1
+    volumes:
+      - shared:c:\gopath
+    working_dir: /usr/src/app
+    command: bash -c "go test -v"

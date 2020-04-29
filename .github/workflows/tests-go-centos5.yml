@@ -20,7 +20,7 @@ env:
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
+  test-go-centos:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,8 +28,19 @@ jobs:
 
       - name: Run Go tests in Centos 5
         run: |
-          docker-compose --file docker-compose.test.yml build
-          docker-compose --file docker-compose.test.yml run unit
+          docker-compose --file docker-compose-test-centos5.yml build
+          docker-compose --file docker-compose-test-centos5.yml run unit
+
+  test-go-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run Go tests in Centos 5
+        run: |
+          docker-compose --file docker-compose-test-windows.yml build
+          docker-compose --file  docker-compose-test-windows.yml run unit
 
 
 
