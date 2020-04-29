@@ -3,7 +3,6 @@ version: '3'
 services:
   s3fuse:
     image: jportasa/s3fuse:1.0
-    #image: xueshanf/s3fs:latest
     cap_add:
       - MKNOD
       - SYS_ADMIN

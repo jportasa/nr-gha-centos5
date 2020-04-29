@@ -1,32 +1,23 @@
-FROM alpine:3.5
-# build stage 1: compile s3fs
+FROM ubuntu:16.04
+MAINTAINER Xueshan Feng <xueshan.feng@gmail.com>
 
-# the following ENV need to be present
-ENV IAM_ROLE=none
-ENV MOUNT_POINT=/mnt/repo
-VOLUME /var/s3
+ENV VERSION 1.83
 
-ARG S3FS_VERSION=v1.80
+RUN apt-get update -qq
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+ automake \
+ curl \
+ build-essential \
+ libcurl4-openssl-dev \
+ libssl-dev \
+ libfuse-dev \
+ libtool \
+ libxml2-dev mime-support \
+ tar \
+ pkg-config \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN apk --update add fuse alpine-sdk automake autoconf libxml2-dev fuse-dev curl-dev git bash;
-RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git; \
- cd s3fs-fuse; \
- git checkout tags/${S3FS_VERSION}; \
- ./autogen.sh; \
- ./configure --prefix=/usr; \
- make; \
- make install
+RUN curl -L https://github.com/s3fs-fuse/s3fs-fuse/archive/v${VERSION}.tar.gz | tar zxv -C /usr/src
+RUN cd /usr/src/s3fs-fuse-${VERSION} && ./autogen.sh && ./configure --prefix=/usr && make && make install
 
-FROM alpine:3.5
-# build stage 2: install s3fs and entrypoint.sh in a clean base.
-
-ARG S3FS_VERSION=v1.80
-LABEL maintainer "xuwang@gmail.com"
-LABEL alpine_version="3.5"
-LABEL s3fs-fuse_version=${S3FS_VERSION}
-
-COPY --from=0 /usr/bin/s3fs /usr/bin
-
-COPY entrypoint.sh /
-RUN chmod 755 /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/bash"]
