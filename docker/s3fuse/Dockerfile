@@ -20,7 +20,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
 RUN curl -L https://github.com/s3fs-fuse/s3fs-fuse/archive/v${VERSION}.tar.gz | tar zxv -C /usr/src
 RUN cd /usr/src/s3fs-fuse-${VERSION} && ./autogen.sh && ./configure --prefix=/usr && make && make install
 
-ADD run.sh run.sh
-RUN chmod +x run.sh
-
-CMD ["/bin/bash"]
+COPY entrypoint.sh /
+RUN chmod 755 /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

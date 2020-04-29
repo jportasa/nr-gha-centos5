@@ -12,7 +12,7 @@ services:
       - /dev/fuse
     volumes:
       - /mnt/data:/mnt:shared
-    command: /usr/bin/s3fs -f -o allow_other -o use_cache=/tmp nr-test /mnt/
+#    command: /usr/bin/s3fs -f -o allow_other -o use_cache=/tmp nr-test /mnt/
 
   repo-yum-updater:
     image: jportasa/repo-yum-updater:1.0
