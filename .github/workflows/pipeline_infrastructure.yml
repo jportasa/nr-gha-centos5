@@ -76,7 +76,7 @@ jobs:
           export MOUNT_POINT
           export REPO_YUM_UPDATE_METADATA_PATH
           export IAM_ROLE
-          docker-compose --file docker-compose-repo-yum-updater.yml up
+          docker-compose --file docker-compose-repo-yum-updater.yml up -d
 
       - name: Check running containers
         run: docker ps -a
