@@ -68,6 +68,7 @@ jobs:
           MOUNT_POINT: "/mnt/"
           REPO_YUM_UPDATE_METADATA_PATH: 'infrastructure_agent/linux/yum/el/8/x86_64'
         run: |
+
           docker-compose --file docker-compose-repo-yum-updater.yml up
 
       - name: Check running containers
