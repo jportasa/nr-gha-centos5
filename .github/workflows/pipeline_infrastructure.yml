@@ -20,33 +20,55 @@ env:
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test-go-centos:
+#  test-go-centos:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Run Go tests in Centos 5
+#        run: |
+#          docker-compose --file docker-compose-test-centos5.yml run unit
+#
+#  test-go-windows:
+#    runs-on: windows-latest
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Run Go tests in Windows
+#        run: |
+#          docker-compose --file  docker-compose-test-windows.yml run unit
+#
+#  test-go-windows:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Run Go tests in Windows
+#        run: |
+#          docker-compose --file  docker-compose-test-windows.yml run unit
+
+
+  repo-yum-updater:
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Run Go tests in Centos 5
-        run: |
-          docker-compose --file docker-compose-test-centos5.yml run unit
-
-  test-go-windows:
-    runs-on: windows-latest
+    env:
+      AWSACCESSKEYID: ${{ secrets.AWSACCESSKEYID }}
+      AWSSECRETACCESSKEY: ${{ secrets.AWSSECRETACCESSKEY }}
+      AWS_REGION: us-east-1
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run Go tests in Windows
+      - name: Start s3fuse & repo-yum-updater
         run: |
-          docker-compose --file  docker-compose-test-windows.yml run unit
+          docker-compose --file docker-compose-repo-yum-updater.yml up -d
 
-  test-go-windows:
-    runs-on: ubuntu-latest
+      - name: Check running containers
+        run: docker ps -a
 
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Run Go tests in Windows
+      - name: Stop s3fuse & repo-yum-updater
         run: |
-          docker-compose --file  docker-compose-test-windows.yml run unit
-
+          docker-compose --file docker-compose-repo-yum-updater.yml down

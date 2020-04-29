@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  s3fuse:
+    image: xueshanf/s3fs:latest
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    devices:
+      - /dev/fuse
+    volumes:
+      - /mnt/data:/mnt:shared
+    command: /usr/bin/s3fs -f -o allow_other -o use_cache=/tmp nr-test /mnt/
+
+  yu-repo-updater:
+    image: alpine
+    command: ls -la /mnt
+    volumes:
+      - /mnt/data:/mnt
+    depends_on:
+      - s3fuse
