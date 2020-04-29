@@ -20,7 +20,7 @@ env:
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test-go-centos:
+  test-go-windows:
     runs-on: windows-latest
 
     steps:
