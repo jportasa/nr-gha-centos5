@@ -53,16 +53,17 @@ jobs:
   repo-yum-updater:
     runs-on: ubuntu-latest
 
-    env:
-      AWSACCESSKEYID: ${{ secrets.AWSACCESSKEYID }}
-      AWSSECRETACCESSKEY: ${{ secrets.AWSSECRETACCESSKEY }}
-      AWS_REGION: us-east-1
-      REPO_YUM_UPDATE_METADATA_PATH: infrastructure_agent/linux/yum/el/8/x86_64
+
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Start s3fuse & repo-yum-updater
+        env:
+          AWSACCESSKEYID: ${{ secrets.AWSACCESSKEYID }}
+          AWSSECRETACCESSKEY: ${{ secrets.AWSSECRETACCESSKEY }}
+          AWS_REGION: us-east-1
+          REPO_YUM_UPDATE_METADATA_PATH: infrastructure_agent/linux/yum/el/8/x86_64
         run: |
           docker-compose --file docker-compose-repo-yum-updater.yml up
 
