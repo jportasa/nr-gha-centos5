@@ -64,13 +64,10 @@ jobs:
 
       - name: Start s3fuse & repo-yum-updater
         run: |
-          docker-compose --file docker-compose-repo-yum-updater.yml up -d
+          docker-compose --file docker-compose-repo-yum-updater.yml up
 
       - name: Check running containers
         run: docker ps -a
-
-      - name: Check logs
-        run: docker logs repo-yum-updater
 
       - name: Stop s3fuse & repo-yum-updater
         run: |
