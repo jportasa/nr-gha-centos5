@@ -3,6 +3,9 @@ version: '3'
 services:
   s3fs:
     image: xueshanf/s3fs:latest
+    environment:
+      AWSACCESSKEYID: AKIA54FIHR7BVZE262TT
+      AWSSECRETACCESSKEY: 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
     cap_add:
       - MKNOD
       - SYS_ADMIN
