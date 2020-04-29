@@ -6,9 +6,9 @@ IFS=$'\n\t'
 
 export S3_ACL=${S3_ACL:-private}
 
-test $MOUNT_POINT
-rm -rf ${MOUNT_POINT}
-mkdir -p ${MOUNT_POINT}
+#test $MOUNT_POINT
+#rm -rf ${MOUNT_POINT}
+#mkdir -p ${MOUNT_POINT}
 
 if [ "$IAM_ROLE" == "none" ]; then
   export AWSACCESSKEYID=${AWSACCESSKEYID:-$AWS_ACCESS_KEY_ID}
