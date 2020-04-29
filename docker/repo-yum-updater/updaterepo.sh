@@ -5,7 +5,7 @@ set -x
 
 REPO=${1}
 
-LOCAL_REPO_PATH="/data/${REPO}"
+LOCAL_REPO_PATH="/mnt/repo/${REPO}"
 if ! [[ -d "${LOCAL_REPO_PATH}" ]]; then
     echo "No repo ${LOCAL_REPO_PATH} found"
     exit 1

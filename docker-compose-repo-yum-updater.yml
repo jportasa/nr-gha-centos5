@@ -14,10 +14,10 @@ services:
       - /mnt/data:/mnt:shared
     command: /usr/bin/s3fs -f -o allow_other -o use_cache=/tmp nr-test /mnt/
 
-  yu-repo-updater:
-    image: alpine
-    command: ls -la /mnt
+  repo-yum-updater:
+    image: jportasa/repo-yum-updater:1.0
+    command: /updaterepo.sh $REPO_YUM_UPDATE_METADATA_PATH
     volumes:
-      - /mnt/data:/mnt
+      - /mnt/data:/mnt/repo
     depends_on:
       - s3fuse

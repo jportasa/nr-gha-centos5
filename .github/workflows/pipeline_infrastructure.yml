@@ -58,6 +58,7 @@ jobs:
       AWSACCESSKEYID: ${{ secrets.AWSACCESSKEYID }}
       AWSSECRETACCESSKEY: ${{ secrets.AWSSECRETACCESSKEY }}
       AWS_REGION: us-east-1
+      REPO_YUM_UPDATE_METADATA_PATH: infrastructure_agent/linux/yum/el/8/x86_64
 
     steps:
       - uses: actions/checkout@v2
