@@ -1,5 +1,4 @@
 FROM alpine:3.5
-# build stage 1: compile s3fs
 
 # the following ENV need to be present
 ENV IAM_ROLE=none
@@ -17,16 +16,6 @@ RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git; \
  make; \
  make install
 
-FROM alpine:3.5
-# build stage 2: install s3fs and entrypoint.sh in a clean base.
-
-ARG S3FS_VERSION=v1.80
-LABEL maintainer "xuwang@gmail.com"
-LABEL alpine_version="3.5"
-LABEL s3fs-fuse_version=${S3FS_VERSION}
-
-COPY --from=0 /usr/bin/s3fs /usr/bin
-
 COPY entrypoint.sh /
 RUN chmod 755 /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]
