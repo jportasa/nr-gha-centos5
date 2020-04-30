@@ -69,7 +69,7 @@ jobs:
           IAM_ROLE: 'none'
           VAR: "pepeepepeepep"
         run: |
-          docker-compose --file docker-compose-alpine.yml up -d
+          docker-compose --file docker-compose-alpine.yml up
 
       - name: Check running containers
         run: docker ps -a
