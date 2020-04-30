@@ -15,7 +15,7 @@ services:
     devices:
       - /dev/fuse
     volumes:
-      - s3data:/mnt:shared
+      - s3data:/mnt
 
   repo-yum-updater:
     image: jportasa/repo-yum-updater:1.0
