@@ -14,7 +14,6 @@ else
   /usr/bin/s3fs ${S3_BUCKET} ${MOUNT_POINT} -o iam_role=${IAM_ROLE},nosuid,nonempty,nodev,allow_other,default_acl=${S3_ACL},retries=5
 fi
 
-sleep 100000
 
 
 
