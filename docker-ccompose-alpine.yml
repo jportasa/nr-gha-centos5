@@ -1,5 +1,0 @@
-version: '3'
-
-services:
-  alpine:
-    image: jportasa/alpine:1.0
