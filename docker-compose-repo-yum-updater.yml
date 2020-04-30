@@ -17,16 +17,13 @@ services:
     devices:
       - /dev/fuse
     volumes:
-      - s3data:/mnt
+      - /mnt/data:/mnt:shared
 
   repo-yum-updater:
     image: jportasa/repo-yum-updater:1.0
     environment:
        REPO_YUM_UPDATE_METADATA_PATH: $REPO_YUM_UPDATE_METADATA_PATH
     volumes:
-      - s3data:/mnt/repo
+      - /mnt/data:/mnt/repo
     depends_on:
       - s3fuse
-
-volumes:
-  s3data:
