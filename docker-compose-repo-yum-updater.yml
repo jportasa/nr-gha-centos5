@@ -22,6 +22,6 @@ services:
     environment:
        REPO_YUM_UPDATE_METADATA_PATH: $REPO_YUM_UPDATE_METADATA_PATH
     volumes:
-      - /mnt/data:/mnt:shared
+      - /mnt/data:/mnt
     depends_on:
       - s3fuse
