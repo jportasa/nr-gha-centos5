@@ -69,13 +69,6 @@ jobs:
           REPO_YUM_UPDATE_METADATA_PATH: 'infrastructure_agent/linux/yum/el/8/x86_64'
           IAM_ROLE: 'none'
         run: |
-          export AWS_ACCESS_KEY_ID
-          export AWS_SECRET_ACCESS_KEY
-          export AWS_REGION
-          export S3_BUCKET
-          export MOUNT_POINT
-          export REPO_YUM_UPDATE_METADATA_PATH
-          export IAM_ROLE
           docker-compose --file docker-compose-repo-yum-updater.yml up -d
 
       - name: Check running containers
@@ -83,4 +76,4 @@ jobs:
 
       - name: Stop s3fuse & repo-yum-updater
         run: |
-          docker-compose --file docker-compose-repo-yum-updater.yml down
+          docker-compose --file docker-compose-alpine.yml down
