@@ -6,9 +6,7 @@ services:
     environment:
       AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
       AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-      AWS_REGION: $AWS_REGION
-      S3_BUCKET: $S3_BUCKET
-      IAM_ROLE: $IAM_ROLE
+      AWS_STORAGE_BUCKET_NAME: $AWS_STORAGE_BUCKET_NAME
     cap_add:
       - MKNOD
       - SYS_ADMIN
@@ -18,7 +16,6 @@ services:
       - /dev/fuse
     volumes:
       - /mnt/data:/mnt:shared
-    command: /usr/bin/s3fs ${S3_BUCKET} /mnt -o iam_role=${IAM_ROLE},nosuid,nonempty,nodev,allow_other,default_acl=${S3_ACL},retries=5
 
   repo-yum-updater:
     image: jportasa/repo-yum-updater:1.0
