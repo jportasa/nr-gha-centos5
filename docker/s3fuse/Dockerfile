@@ -2,8 +2,8 @@ FROM alpine:3.5
 
 # the following ENV need to be present
 ENV IAM_ROLE=none
-ENV MOUNT_POINT=/var/s3
-VOLUME /var/s3
+ENV MOUNT_POINT=/mnt
+VOLUME /mnt
 
 ARG S3FS_VERSION=v1.80
 
@@ -18,4 +18,4 @@ RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git; \
 
 COPY entrypoint.sh /
 RUN chmod 755 /entrypoint.sh
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
