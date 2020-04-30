@@ -75,4 +75,4 @@ jobs:
 
       - name: Stop s3fuse & repo-yum-updater
         run: |
-          docker-compose --file docker-compose-alpine.yml down
+          docker-compose --file docker-compose-repo-yum-updater.yml down
