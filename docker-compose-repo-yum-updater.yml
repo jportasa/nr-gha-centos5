@@ -21,8 +21,7 @@ services:
     image: jportasa/repo-yum-updater:1.0
     environment:
        REPO_YUM_UPDATE_METADATA_PATH: $REPO_YUM_UPDATE_METADATA_PATH
-    command: /updaterepo.sh $REPO_YUM_UPDATE_METADATA_PATH
     volumes:
-      - /mnt/data:/mnt/
+      - /mnt/data:/mnt
     depends_on:
       - s3fuse
