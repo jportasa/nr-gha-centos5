@@ -52,14 +52,9 @@ jobs:
 
   repo-yum-updater:
     runs-on: ubuntu-latest
-
-
-
     steps:
       - uses: actions/checkout@v2
-
       - name: Start s3fuse & repo-yum-updater
-
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -69,10 +64,6 @@ jobs:
           REPO_YUM_UPDATE_METADATA_PATH: 'infrastructure_agent/linux/yum/el/8/x86_64'
         run: |
           docker-compose --file docker-compose-repo-yum-updater.yml up -d
-
-      - name: Check running containers
-        run: docker ps -a
-
       - name: Stop s3fuse & repo-yum-updater
         run: |
           docker-compose --file docker-compose-repo-yum-updater.yml down

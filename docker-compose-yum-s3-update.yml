@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  s3fuse:
+    image: jportasa/s3fuse:1.0
+    environment:
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      S3_BUCKET: $S3_BUCKET
+      MOUNT_POINT: $MOUNT_POINT
+      IAM_ROLE: $IAM_ROLE
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    devices:
+      - /dev/fuse
+    volumes:
+      - /mnt/data:/mnt:shared
+
+  repo-yum-updater:
+    image: jportasa/aptly:1.0
+    command: sleep 100000
+    environment:
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+    volumes:
+      - /mnt/data:/mnt/aptly
+    depends_on:
+      - s3fuse
