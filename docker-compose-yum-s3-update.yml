@@ -17,7 +17,7 @@ services:
     devices:
       - /dev/fuse
     volumes:
-      - /mnt/data2:/mnt:shared
+      - /mnt/data:/mnt:shared
 
   repo-yum-updater:
     image: jportasa/aptly:2.0
@@ -26,6 +26,6 @@ services:
       AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
       AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
     volumes:
-      - /mnt/data2:/mnt/aptly
+      - /mnt/data:/mnt/aptly
     depends_on:
       - s3fuse

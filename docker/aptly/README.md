@@ -5,7 +5,11 @@
 gpg --generate-key
 gpg --list-secret-keys
 ```
-
+```
+apt-get install rng-tools
+rngd -r /dev/urandom
+kill -9 $(pidof rngd)
+```
 
 ```
 root@fa36340221ce:/# gpg --list-secret-keys
