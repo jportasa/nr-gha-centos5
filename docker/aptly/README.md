@@ -5,10 +5,10 @@
 gpg --generate-key
 gpg --list-secret-keys
 ```
+
+To generate entropy dodrung the creatin of the key
 ```
-apt-get install rng-tools
-rngd -r /dev/urandom
-kill -9 $(pidof rngd)
+while true; do cat /proc/sys/kernel/random/entropy_avail; dd bs=100M count=1 if=/dev/zero of=/tmp/foo conv=fdatasync; done
 ```
 
 ```
@@ -28,12 +28,12 @@ ssb   rsa3072 2020-05-05 [E] [expires: 2022-05-05]
 GPG
 ```
 curl -s https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg |  apt-key add -
-gpg --no-default-keyring --keyring trustedkeys.gpg --keyserver pool.sks-keyservers.net --recv-keys BB29EE038ECCE87C
+gpg --no-default-keyring --keyring trustedkeys.gpg --keyserver pool.sks-keyservers.net --recv-keys <GPG KEY EX: BB29EE038ECCE87C>
 ```
 
 ```
 aptly mirror create <name> <archive url> <distribution> [<component1> ...]
-aptly mirror create newrelic https://download.newrelic.com/infrastructure_agent/linux/apt/ bionic main
+aptly mirror create  newrelic https://download.newrelic.com/infrastructure_agent/linux/apt/ bionic main
 ```
 
 Download remote repo contents
@@ -62,10 +62,14 @@ Create snapshot
 ```
 aptly snapshot create snap-newrelic from repo localnewrelic
 ```
+Export GPG from old repo to the mirror
+https://ahelpme.com/linux/aptly-mirror-gpgv-cant-check-signature-public-key-not-found/
+
 Create GPG signing key
 ```
 gpg --default-new-key-algo rsa4096 --gen-key --keyring pubring.gpg
 gpg --list-keys --keyring pubring.gpg
+gpg --list-keys
 ```
 Delete GPG key:
 ```
@@ -114,10 +118,8 @@ Recreate snapshot
 ```
 aptly snapshot create snapshot-newrelic-$(date +"%Y-%m-%d_%H-%M-%S") from repo localnewrelic
 ```
-aptly snapshot create snap-newrelic from repo localnewrelic
-"snapshot.$(date +"%Y%m%d)"
 
 Update published repo in S3
 ```
-aptly publish switch --skip-signing bionic s3:nr-repo-apt: snap-newrelic-2
+aptly publish switch --skip-signing bionic s3:nr-repo-apt: snapshot-newrelic-2020-05-05_17-00-56
 ```
