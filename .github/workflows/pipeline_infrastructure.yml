@@ -69,6 +69,7 @@ jobs:
 #          docker-compose --file docker-compose-repo-yum-updater.yml down
 
   get-aws-secret:
+    runs-on: ubuntu-latest
     steps:
      - name: Read secrets from AWS Secrets Manager into environment variables
        uses: action-factory/aws-secrets-manager-action@0.2
