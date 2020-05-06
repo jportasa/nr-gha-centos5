@@ -50,20 +50,34 @@ jobs:
 #        run: |
 #          docker-compose --file  docker-compose-test-windows.yml run unit
 
-  repo-yum-updater:
-    runs-on: ubuntu-latest
+#  repo-yum-updater:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Start s3fuse & repo-yum-updater
+#        env:
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          S3_BUCKET: 'nr-test'
+#          MOUNT_POINT: '/mnt'
+#          IAM_ROLE: 'none'
+#          REPO_YUM_UPDATE_METADATA_PATH: 'infrastructure_agent/linux/yum/el/8/x86_64'
+#        run: |
+#          docker-compose --file docker-compose-repo-yum-updater.yml up -d
+#      - name: Stop s3fuse & repo-yum-updater
+#        run: |
+#          docker-compose --file docker-compose-repo-yum-updater.yml down
+
+  get-aws-secret:
     steps:
-      - uses: actions/checkout@v2
-      - name: Start s3fuse & repo-yum-updater
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          S3_BUCKET: 'nr-test'
-          MOUNT_POINT: '/mnt'
-          IAM_ROLE: 'none'
-          REPO_YUM_UPDATE_METADATA_PATH: 'infrastructure_agent/linux/yum/el/8/x86_64'
-        run: |
-          docker-compose --file docker-compose-repo-yum-updater.yml up -d
-      - name: Stop s3fuse & repo-yum-updater
-        run: |
-          docker-compose --file docker-compose-repo-yum-updater.yml down
+     - name: Read secrets from AWS Secrets Manager into environment variables
+       uses: action-factory/aws-secrets-manager-action@0.2
+       with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          secrets: |
+            GPG-repo-key
+          parse_json: true
+       run: |
+          echo $GPG-repo-key

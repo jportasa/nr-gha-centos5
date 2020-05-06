@@ -1,40 +1,10 @@
 # Using Aptly
 
 ## Mirroring a site
-```
-gpg --generate-key
-gpg --list-secret-keys
-```
 
-To generate entropy dodrung the creatin of the key
-```
-while true; do cat /proc/sys/kernel/random/entropy_avail; dd bs=100M count=1 if=/dev/zero of=/tmp/foo conv=fdatasync; done
-```
-
-```
-root@fa36340221ce:/# gpg --list-secret-keys
-gpg: checking the trustdb
-gpg: marginals needed: 3  completes needed: 1  trust model: pgp
-gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
-gpg: next trustdb check due at 2022-05-05
-/root/.gnupg/pubring.kbx
-------------------------
-sec   rsa3072 2020-05-05 [SC] [expires: 2022-05-05]
-      D310E5B59CAA15DBCF68ED57E793938EA1C15A28
-uid           [ultimate] new-relic <kk@kk.es>
-ssb   rsa3072 2020-05-05 [E] [expires: 2022-05-05]
-```
 
 GPG
-```
-curl -s https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg |  apt-key add -
-gpg --no-default-keyring --keyring trustedkeys.gpg --keyserver pool.sks-keyservers.net --recv-keys <GPG KEY EX: BB29EE038ECCE87C>
-```
 
-```
-aptly mirror create <name> <archive url> <distribution> [<component1> ...]
-aptly mirror create  newrelic https://download.newrelic.com/infrastructure_agent/linux/apt/ bionic main
-```
 
 Download remote repo contents
 ```
@@ -123,3 +93,5 @@ Update published repo in S3
 ```
 aptly publish switch --skip-signing bionic s3:nr-repo-apt: snapshot-newrelic-2020-05-05_17-00-56
 ```
+
+

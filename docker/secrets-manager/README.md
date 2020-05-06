@@ -1,0 +1,1 @@
+docker run get-secret-manager $REGION $SECRETNAME
