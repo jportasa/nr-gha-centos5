@@ -79,5 +79,6 @@ jobs:
           secrets: |
             GPG-repo-key
           parse_json: true
+     - name: Print secret
        run: |
           echo $GPG-repo-key
