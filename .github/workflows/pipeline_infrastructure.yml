@@ -82,4 +82,4 @@ jobs:
      - name: Print secret
        run: |
           env
-          echo
+          echo $GPG_repo_key
