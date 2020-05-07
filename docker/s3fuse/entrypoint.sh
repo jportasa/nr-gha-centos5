@@ -8,14 +8,14 @@ if [ "$IAM_ROLE" == "none" ]; then
   export AWSACCESSKEYID=${AWSACCESSKEYID:-$AWS_ACCESS_KEY_ID}
   export AWSSECRETACCESSKEY=${AWSSECRETACCESSKEY:-$AWS_SECRET_ACCESS_KEY}
   echo 'IAM_ROLE is not set - mounting S3 with credentials from ENV'
-  /usr/bin/s3fs ${S3_BUCKET} ${MOUNT_POINT} -o nosuid,nonempty,nodev,allow_other,default_acl=${S3_ACL},retries=5
+  /usr/bin/s3fs ${S3_BUCKET} ${MOUNT_POINT} -o use_cache=/tmp -o allow_other
 else
   echo 'IAM_ROLE is set - using it to mount S3'
-  /usr/bin/s3fs ${S3_BUCKET} ${MOUNT_POINT} -o iam_role=${IAM_ROLE},nosuid,nonempty,nodev,allow_other,default_acl=${S3_ACL},retries=5
+  /usr/bin/s3fs ${S3_BUCKET} ${MOUNT_POINT} -o iam_role=${IAM_ROLE} -o use_cache=/tmp -o allow_other
 fi
 
 # This sleep is needed because other containers are using this s3 mount
-sleep 6000
+sleep 10000
 
 
 

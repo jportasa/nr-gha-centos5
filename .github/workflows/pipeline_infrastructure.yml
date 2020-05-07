@@ -67,19 +67,3 @@ jobs:
 #      - name: Stop s3fuse & repo-yum-updater
 #        run: |
 #          docker-compose --file docker-compose-repo-yum-updater.yml down
-
-
-  get-aws-secret:
-    runs-on: ubuntu-latest
-    steps:
-     - name: Read secrets from AWS Secrets Manager into environment variables
-       uses: action-factory/aws-secrets-manager-action@v0.2.0
-       with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.AWS_REGION }}
-          secrets: GPG_repo_key
-          parse_json: false
-     - name: Print secret
-       run: |
-         env
