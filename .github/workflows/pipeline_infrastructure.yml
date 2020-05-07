@@ -77,8 +77,8 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
-          secrets: |
-            GPG_repo_key
+          secrets: GPG_repo_key
+          parse_json: false
      - name: Print secret
        run: |
-          echo $GPG_repo_key
+          env | grep GPG_repo_key

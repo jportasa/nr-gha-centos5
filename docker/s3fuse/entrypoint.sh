@@ -15,7 +15,7 @@ else
 fi
 
 # This sleep is needed because other containers are using this s3 mount
-sleep 600
+sleep 6000
 
 
 
