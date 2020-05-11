@@ -34,7 +34,7 @@ jobs:
         -e $AWS_STORAGE_BUCKET_NAME \
         -e $AWS_S3_MOUNTPOINT \
         -e $APTLY_REPO_NAME \
-        jportasa/aptly-s3fuse:1.0 bash -c 'aptly repo show $APTLY_REPO_NAME'
+        jportasa/aptly-s3fuse:1.0 bash -c 'ls /mnt/aptly/'
 
 #        && cat $gpg_private_key \
 #        && echo $gpg_private_key > gpg_private-key.gpg \
