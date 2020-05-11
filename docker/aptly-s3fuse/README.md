@@ -4,8 +4,8 @@ aws secretsmanager create-secret --region $REGION --name gpg-repo-key  --descrip
 
 ```
 docker run -it -d --privileged \
-  -e AWS_ACCESS_KEY_ID=AKIA54FIHR7B3T5Q4OGS \
-  -e AWS_SECRET_ACCESS_KEY=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 \
+  -e AWS_ACCESS_KEY_ID=XXXXX \
+  -e AWS_SECRET_ACCESS_KEY=XXXXX \
   -e AWS_STORAGE_BUCKET_NAME=nr-aptly-backend \
   -e AWS_S3_MOUNTPOINT=/mnt/aptly \
   jportasa/aptly-s3fuse:1.0
