@@ -34,13 +34,13 @@ jobs:
         -e $AWS_STORAGE_BUCKET_NAME \
         -e $AWS_S3_MOUNTPOINT \
         jportasa/aptly-s3fuse:1.0 \
-        aptly repo show $APTLY_REPO_NAME \
-        && cat $gpg_private_key \
-        && echo $gpg_private_key > gpg_private-key.gpg \
-        && gpg --allow-secret-key-import $gpg_private_key.gpg \
-        && wget -qO https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb \
-        && aptly repo add ${APTLY_REPO_NAME} ./nri-haproxy_0.1.0-1_amd64.deb \
-        && aptly publish repo $APTLY_REPO_NAME s3:${AWS_APTLY_FRONTEND_STORAGE_NAME}:
+        aptly repo show $APTLY_REPO_NAME
+#        && cat $gpg_private_key \
+#        && echo $gpg_private_key > gpg_private-key.gpg \
+#        && gpg --allow-secret-key-import $gpg_private_key.gpg \
+#        && wget -qO https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb \
+#        && aptly repo add ${APTLY_REPO_NAME} ./nri-haproxy_0.1.0-1_amd64.deb \
+#        && aptly publish repo $APTLY_REPO_NAME s3:${AWS_APTLY_FRONTEND_STORAGE_NAME}:
 
 
 
