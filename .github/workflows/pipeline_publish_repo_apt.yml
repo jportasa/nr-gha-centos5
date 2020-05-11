@@ -17,9 +17,8 @@ jobs:
         # Secret will be converted to env var
         secrets: gpg_private_key
         parse_json: false
-
+    - uses: actions/checkout@v2
     - name: Push APT_NEW_DEB_PACKAGE to APT repo in S3
-      uses: actions/checkout@v2
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
