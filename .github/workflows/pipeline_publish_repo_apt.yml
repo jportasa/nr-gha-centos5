@@ -33,6 +33,7 @@ jobs:
         -e $AWS_SECRET_ACCESS_KEY \
         -e $AWS_STORAGE_BUCKET_NAME \
         -e $AWS_S3_MOUNTPOINT \
+        -e $APTLY_REPO_NAME \
         jportasa/aptly-s3fuse:1.0 \
         aptly repo show $APTLY_REPO_NAME
 #        && cat $gpg_private_key \
