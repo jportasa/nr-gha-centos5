@@ -3,12 +3,12 @@ REGION='us-east-1'
 aws secretsmanager create-secret --region $REGION --name gpg-repo-key  --description "gpg-repo-key" --secret-string Elquesigui
 
 ```
-docker run -it -d --privileged \
-  -e AWS_ACCESS_KEY_ID=XXXXX \
-  -e AWS_SECRET_ACCESS_KEY=XXXXX \
-  -e AWS_STORAGE_BUCKET_NAME=nr-aptly-backend \
-  -e AWS_S3_MOUNTPOINT=/mnt/aptly \
-  jportasa/aptly-s3fuse:1.0
+docker run  -it  --privileged \
+  -e AWS_ACCESS_KEY_ID=XXXXXXX \
+  -e AWS_SECRET_ACCESS_KEY='XXXXXXX' \
+  -e AWS_STORAGE_BUCKET_NAME='nr-aptly-backend' \
+  -e AWS_S3_MOUNTPOINT='/mnt/aptly' \
+  jportasa/aptly-s3fuse:1.0 bash -c "ls /mnt/aptly"
 ```
 
 
