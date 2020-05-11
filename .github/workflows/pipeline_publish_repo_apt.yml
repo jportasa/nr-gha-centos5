@@ -23,12 +23,12 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_STORAGE_BUCKET_NAME: 'nr-aptly-backend'
-        AWS_APTLY_FRONTEND_STORAGE_NAME: 'nr-repo-apt'
+        AWS_APTLY_FRONTEND_STORAGE_NAME: 'nr-aptly-backend'
         AWS_S3_MOUNTPOINT: '/mnt/aptly'
         APTLY_REPO_NAME: 'bionic-main'
         APT_NEW_DEB_PACKAGE: ''
       run: |
-        docker run -it -d --privileged \
+        docker run -it --privileged \
         -e $AWS_ACCESS_KEY_ID \
         -e $AWS_SECRET_ACCESS_KEY \
         -e $AWS_STORAGE_BUCKET_NAME \
