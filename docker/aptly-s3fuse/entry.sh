@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Entry point to mount s3fs filesystem before exec'ing command.
 
