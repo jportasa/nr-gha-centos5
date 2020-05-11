@@ -28,7 +28,7 @@ jobs:
         APTLY_REPO_NAME: 'bionic-main'
         APT_NEW_DEB_PACKAGE: ''
       run: |
-        docker run -it --privileged \
+        docker run --privileged \
         -e $AWS_ACCESS_KEY_ID \
         -e $AWS_SECRET_ACCESS_KEY \
         -e $AWS_STORAGE_BUCKET_NAME \
