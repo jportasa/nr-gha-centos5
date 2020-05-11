@@ -28,14 +28,14 @@ jobs:
         APTLY_REPO_NAME: 'bionic-main'
         APT_NEW_DEB_PACKAGE: ''
       run: |
-        docker run -t --privileged \
+        docker run -it --privileged \
         -e $AWS_ACCESS_KEY_ID \
         -e $AWS_SECRET_ACCESS_KEY \
         -e $AWS_STORAGE_BUCKET_NAME \
         -e $AWS_S3_MOUNTPOINT \
         -e $APTLY_REPO_NAME \
-        jportasa/aptly-s3fuse:1.0 \
-        aptly repo show $APTLY_REPO_NAME
+        jportasa/aptly-s3fuse:1.0 bash -c \
+        'aptly repo show $APTLY_REPO_NAME'
 #        && cat $gpg_private_key \
 #        && echo $gpg_private_key > gpg_private-key.gpg \
 #        && gpg --allow-secret-key-import $gpg_private_key.gpg \
