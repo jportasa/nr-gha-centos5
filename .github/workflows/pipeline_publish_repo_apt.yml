@@ -19,11 +19,10 @@ jobs:
         parse_json: false
 
     - name: GIT checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2'
 
-    - name: set many environment variables
-      uses: allenevans/set-env@v1.0.0
-      with:
+    - name: Push APT_NEW_DEB_PACKAGE to APT repo in S3
+      env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_STORAGE_BUCKET_NAME: 'nr-aptly-backend'
@@ -31,12 +30,14 @@ jobs:
         AWS_S3_MOUNTPOINT: '/mnt/aptly'
         APTLY_REPO_NAME: 'bionic-main'
         APT_NEW_DEB_PACKAGE: ''
-
-    - name: Push APT_NEW_DEB_PACKAGE to APT repo in S3
       run: |
-        echo $AWS_STORAGE_BUCKET_NAME
-        docker run --privileged jportasa/aptly-s3fuse:1.0 \
-           aptly repo show $APTLY_REPO_NAME \
+        docker run -it -d --privileged \
+        -e $AWS_ACCESS_KEY_ID \
+        -e $AWS_SECRET_ACCESS_KEY \
+        -e $AWS_STORAGE_BUCKET_NAME \
+        -e $AWS_S3_MOUNTPOINT \
+        jportasa/aptly-s3fuse:1.0 \
+        aptly repo show $APTLY_REPO_NAME \
         && echo $gpg_private_key > gpg_private-key.gpg \
         && gpg --allow-secret-key-import $gpg_private_key.gpg \
         && wget -qO https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb \
