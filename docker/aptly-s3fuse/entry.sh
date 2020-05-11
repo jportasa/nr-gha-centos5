@@ -43,8 +43,7 @@ mkdir -p ${AWS_S3_MOUNTPOINT}
 # s3fs mount command
 s3fs $S3FS_DEBUG $S3FS_ARGS -o passwd_file=${AWS_S3_AUTHFILE} -o url=${AWS_S3_URL} ${AWS_STORAGE_BUCKET_NAME} ${AWS_S3_MOUNTPOINT}
 
-#echo "Running command $@"
+echo "Running command $@"
 
-#exec "$@"
+exec "$@"
 
-sleep 1000000000
