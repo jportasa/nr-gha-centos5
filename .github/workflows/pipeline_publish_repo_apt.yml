@@ -35,7 +35,8 @@ jobs:
         bash -c """ \
              echo $gpg_private_key > gpg_private_key.gpg; \
              cat gpg_private_key.gpg; \
-             gpg --allow-secret-key-import gpg_private_key.gpg
+             gpg --allow-secret-key-import gpg_private_key.gpg; \
+             gpg --list-keys
         """
 #             gpg --allow-secret-key-import gpg_private_key.gpg; \
 #             gpg --list-keys
