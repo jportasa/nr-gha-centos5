@@ -20,7 +20,7 @@ jobs:
         -e GPG_PRIVATE_KEY=$gpg_private_key \
         jportasa/aptly-s3fuse:1.0 \
         bash -c """ \
-             aws ssm get-parameters --names "gpg_private_key" > gpg_private_key.gpg; \
+             aws ssm get-parameters --names "gpg_private_key" --query "Parameters[0].Value" > gpg_private_key.gpg; \
              cat gpg_private_key.gpg; \
              gpg --allow-secret-key-import gpg_private_key.gpg; \
              gpg --list-keys
