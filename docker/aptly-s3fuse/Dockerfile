@@ -19,7 +19,12 @@ RUN set -x \
 # && apt-get clean
 
 # Install aws-cli
-RUN apt-get install -y wget python python-pip awscli
+RUN apt-get install -y wget curl unzip \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && ./aws/install \
+    && ln -s /usr/local/bin/aws /usr/bin/aws
+
 RUN apt-get clean
 
 ADD aptly.conf /etc/aptly.conf
