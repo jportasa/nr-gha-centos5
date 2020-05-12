@@ -8,9 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Push APT_NEW_DEB_PACKAGE to APT repo in S3
+    - name: Push package to APT repo in S3 with Aptly
       run: |
-        docker run -i --privileged \
+        docker run -i --privileged --name aptly-s3fuse \
         -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
         -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
         -e AWS_REGION=${{ secrets.AWS_REGION }} \

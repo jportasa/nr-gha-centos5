@@ -1,0 +1,20 @@
+name: Publish-to-APT
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Update YUM repo metadata
+      run: |
+        docker run -i --rm --privileged --name yum-updater-s3fuse \
+        -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+        -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+        -e AWS_REGION=${{ secrets.AWS_REGION }} \
+        -e AWS_STORAGE_BUCKET_NAME='nr-repo-apt' \
+        -e AWS_S3_MOUNTPOINT='/mnt/repo' \
+        -e REPO_YUM_UPDATE_METADATA_PATH='/yum/el/8/x86_64/'
+        jportasa/yum-updater-s3fuse:1.0 \
