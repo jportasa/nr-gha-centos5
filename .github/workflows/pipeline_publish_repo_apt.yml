@@ -26,7 +26,7 @@ jobs:
              gpg --list-keys; \
              wget https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb; \
              aptly repo add 'bionic-main' ./nri-haproxy_0.1.0-1_amd64.deb; \
-             aptly publish update 'bionic-main' s3:nr-repo-apt:
+             aptly publish update bionic s3:nr-repo-apt:
         """
 
 
