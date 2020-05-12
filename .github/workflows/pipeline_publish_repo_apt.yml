@@ -18,10 +18,6 @@ jobs:
         secrets: gpg_private_key
         parse_json: false
 
-    - name: Print secret
-      run: |
-        env
-
     - name: Push APT_NEW_DEB_PACKAGE to APT repo in S3
       run: |
         docker run -i --privileged \
@@ -34,7 +30,7 @@ jobs:
         -e GPG_PRIVATE_KEY=$gpg_private_key \
         jportasa/aptly-s3fuse:1.0 \
         bash -c """ \
-             echo GPG_PRIVATE_KEY > gpg_private_key.gpg; \
+             echo $GPG_PRIVATE_KEY > gpg_private_key.gpg; \
              cat gpg_private_key.gpg; \
              gpg --allow-secret-key-import gpg_private_key.gpg; \
              gpg --list-keys
