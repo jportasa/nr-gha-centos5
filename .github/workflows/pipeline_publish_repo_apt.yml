@@ -24,7 +24,7 @@ jobs:
              aws ssm get-parameters --names 'gpg_private_key' --query 'Parameters[0].Value' --output text > gpg_private_key.gpg; \
              gpg --import gpg_private_key.gpg; \
              gpg --list-keys; \
-             wget -qO 'https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb'; \
+             wget https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb; \
              aptly repo add 'bionic-main' ./nri-haproxy_0.1.0-1_amd64.deb; \
              aptly publish repo 'bionic-main' s3:nr-repo-apt:
         """
