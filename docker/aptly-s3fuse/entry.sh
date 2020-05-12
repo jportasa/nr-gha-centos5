@@ -43,11 +43,6 @@ mkdir -p ${AWS_S3_MOUNTPOINT}
 # s3fs mount command
 s3fs $S3FS_DEBUG $S3FS_ARGS -o passwd_file=${AWS_S3_AUTHFILE} -o url=${AWS_S3_URL} ${AWS_STORAGE_BUCKET_NAME} ${AWS_S3_MOUNTPOINT}
 
-# Import GPG private Key
-aws ssm get-parameters --names "gpg_private_key" > gpg_private_key.gpg
-gpg --allow-secret-key-import gpg_private_key.gpg
-gpg --list-keys
-
 echo "Running command $@"
 
 exec "$@"
