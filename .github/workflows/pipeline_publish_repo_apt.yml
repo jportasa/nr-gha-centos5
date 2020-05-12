@@ -17,6 +17,7 @@ jobs:
         # Secret will be converted to env var
         secrets: gpg_private_key
         parse_json: false
+      run: env | grep gpg
 
     - name: Push APT_NEW_DEB_PACKAGE to APT repo in S3
       run: |
