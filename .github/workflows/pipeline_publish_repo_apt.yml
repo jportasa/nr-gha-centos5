@@ -34,10 +34,11 @@ jobs:
              gpg --list-keys \
              apt-get update \
              apt install wget -y
+             wget -qO https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb \
+             aptly repo add ${APTLY_REPO_NAME} ./nri-haproxy_0.1.0-1_amd64.deb \
+             aptly publish repo $APTLY_REPO_NAME s3:${AWS_APTLY_FRONTEND_STORAGE_NAME}:
         """
-#             wget -qO https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb \
-#             aptly repo add ${APTLY_REPO_NAME} ./nri-haproxy_0.1.0-1_amd64.deb \
-#             aptly publish repo $APTLY_REPO_NAME s3:${AWS_APTLY_FRONTEND_STORAGE_NAME}: \
+
 
 
 
