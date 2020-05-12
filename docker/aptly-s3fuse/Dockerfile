@@ -7,7 +7,7 @@ RUN chmod a+x /build-s3fs.sh
 RUN chmod a+x /entry.sh
 RUN /build-s3fs.sh
 
-# Aptly
+# Aptly Install
 ARG APTLY_VERSION
 RUN set -x \
  && apt-get update \
@@ -15,8 +15,12 @@ RUN set -x \
  && apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys ED75B5A4483DA07C \
  && echo 'deb http://repo.aptly.info/ squeeze main' > /etc/apt/sources.list.d/aptly.list \
  && apt-get update \
- && if [ -z "$APTLY_VERSION" ]; then apt-get install -y aptly; else apt-get install -y "aptly=$APTLY_VERSION"; fi \
- && apt-get clean
+ && if [ -z "$APTLY_VERSION" ]; then apt-get install -y aptly; else apt-get install -y "aptly=$APTLY_VERSION"; fi
+# && apt-get clean
+
+# Install aws-cli
+RUN apt-get install -y wget python python-pip awscli
+RUN apt-get clean
 
 ADD aptly.conf /etc/aptly.conf
 VOLUME ["/aptly"]

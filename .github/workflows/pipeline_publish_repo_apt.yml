@@ -8,15 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Get GPG private key from AWS Parameter Store
-      uses: bomb-on/aws-ssm-to-env@master
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-      with:
-        parameter_name: 'gpg_private_key'
-
     - name: Push APT_NEW_DEB_PACKAGE to APT repo in S3
       run: |
         docker run -i --privileged \
@@ -29,7 +20,7 @@ jobs:
         -e GPG_PRIVATE_KEY=$gpg_private_key \
         jportasa/aptly-s3fuse:1.0 \
         bash -c """ \
-             echo $GPG_PRIVATE_KEY > gpg_private_key.gpg; \
+             aws ssm get-parameters --names "gpg_private_key" > gpg_private_key.gpg; \
              cat gpg_private_key.gpg; \
              gpg --allow-secret-key-import gpg_private_key.gpg; \
              gpg --list-keys
