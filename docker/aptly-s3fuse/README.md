@@ -5,7 +5,7 @@ aws secretsmanager create-secret --region $REGION --name gpg_private_key  --desc
 
 aws ssm put-parameter \
         --name "gpg_private_key" \
-        --type SecureString \
+        --type String \
         --description "GPG private key" \
         --value "$(cat gpg_private_key.gpg)"
 
