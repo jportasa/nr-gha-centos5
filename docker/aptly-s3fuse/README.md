@@ -1,6 +1,6 @@
 Secrets manager, create key
 REGION='us-east-1'
-aws secretsmanager create-secret --region $REGION --name gpg-repo-key  --description "gpg-repo-key" --secret-string Elquesigui
+aws secretsmanager create-secret --region $REGION --name gpg_private_key  --description "GPG private key" --secret-string Elquesigui
 
 ```
 docker run  -it  --privileged \
