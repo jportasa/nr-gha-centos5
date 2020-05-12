@@ -20,7 +20,7 @@ jobs:
 
     - name: Print secret
       run: |
-        env | grep gpg
+        env
 
     - name: Push APT_NEW_DEB_PACKAGE to APT repo in S3
       run: |
