@@ -31,9 +31,10 @@ jobs:
         -e AWS_S3_MOUNTPOINT='/mnt/aptly' \
         -e APTLY_REPO_NAME='bionic-main' \
         -e APT_NEW_DEB_PACKAGE='' \
+        -e GPG_PRIVATE_KEY=$gpg_private_key \
         jportasa/aptly-s3fuse:1.0 \
         bash -c """ \
-             echo $gpg_private_key > gpg_private_key.gpg; \
+             echo GPG_PRIVATE_KEY > gpg_private_key.gpg; \
              cat gpg_private_key.gpg; \
              gpg --allow-secret-key-import gpg_private_key.gpg; \
              gpg --list-keys
