@@ -8,15 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Get GPG private key from AWS Secrets Manager
-      uses: action-factory/aws-secrets-manager-action@v0.2.0
+    - name: Get GPG private key from AWS Parameter Store
+      uses: bomb-on/aws-ssm-to-env@master
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
       with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws_region: ${{ secrets.AWS_REGION }}
-        # Secret will be converted to env var
-        secrets: gpg_private_key
-        parse_json: false
+        parameter_name: gpg_private_key
 
     - name: Push APT_NEW_DEB_PACKAGE to APT repo in S3
       run: |
