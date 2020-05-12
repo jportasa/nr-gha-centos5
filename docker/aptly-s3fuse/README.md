@@ -2,6 +2,14 @@ Secrets manager, create key
 REGION='us-east-1'
 aws secretsmanager create-secret --region $REGION --name gpg_private_key  --description "GPG private key" --secret-string Elquesigui
 
+
+aws ssm put-parameter \
+        --name "gpg_private_key" \
+        --type SecureString \
+        --description "GPG private key" \
+        --value "$(cat gpg_private_key.gpg)"
+
+
 ```
 docker run  -it  --privileged \
   -e AWS_ACCESS_KEY_ID=XXXXXXX \
