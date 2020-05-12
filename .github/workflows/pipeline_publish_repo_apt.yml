@@ -1,4 +1,4 @@
-name: Publish-to-APT
+name: Publish-to-APT-repo
 on:
   push:
     branches: [ master ]

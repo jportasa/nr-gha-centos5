@@ -1,4 +1,4 @@
-name: Publish-to-APT
+name: Publish-to-YUM-repo
 on:
   push:
     branches: [ master ]
@@ -16,5 +16,5 @@ jobs:
         -e AWS_REGION=${{ secrets.AWS_REGION }} \
         -e AWS_STORAGE_BUCKET_NAME='nr-repo-apt' \
         -e AWS_S3_MOUNTPOINT='/mnt/repo' \
-        -e REPO_YUM_UPDATE_METADATA_PATH='/yum/el/8/x86_64/'
+        -e REPO_YUM_UPDATE_METADATA_PATH='/yum/el/8/x86_64/' \
         jportasa/yum-updater-s3fuse:1.0 \
