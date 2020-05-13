@@ -4,6 +4,7 @@ services:
 
   unit:
     image: jportasa/windowsnanoserver-go:1.1
+    build: windows/nanoserver
     volumes:
       - ./src/app:c:/gopath
     command: "go test -v"
