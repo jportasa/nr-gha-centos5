@@ -3,8 +3,7 @@ version: '3'
 services:
 
   unit:
-    image: jportasa/windowsnanoserver-go:1.1
-    build: windows/nanoserver
+    build: docker/windows/nanoserver
     volumes:
       - ./src/app:c:/gopath
     command: "go test -v"
